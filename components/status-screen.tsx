@@ -1,23 +1,13 @@
 "use client";
 
 import Link from "next/link";
+import { useI18n } from "@/lib/i18n/context";
 
 type StatusVariant = "consumed" | "expired";
 
 interface StatusScreenProps {
   variant: StatusVariant;
 }
-
-const MESSAGES = {
-  consumed: {
-    title: "Ya fue escuchada",
-    description: "Esta gota de voz ya fue escuchada. Los audios de JustADrop solo se pueden escuchar una vez.",
-  },
-  expired: {
-    title: "Expiró",
-    description: "Esta gota de voz expiró. Los audios de JustADrop se eliminan a las 24h si nadie los escucha.",
-  },
-} as const;
 
 const ICONS: Record<StatusVariant, React.ReactNode> = {
   // Checkmark inside a drop — "already listened"
@@ -60,7 +50,10 @@ const ICONS: Record<StatusVariant, React.ReactNode> = {
 };
 
 export function StatusScreen({ variant }: StatusScreenProps) {
-  const { title, description } = MESSAGES[variant];
+  const { t } = useI18n();
+  const title = variant === "consumed" ? t.status.consumedTitle : t.status.expiredTitle;
+  const description =
+    variant === "consumed" ? t.status.consumedDesc : t.status.expiredDesc;
 
   return (
     <div className="status-screen">
@@ -68,7 +61,7 @@ export function StatusScreen({ variant }: StatusScreenProps) {
       <h1 className="status-screen__title">{title}</h1>
       <p className="status-screen__description">{description}</p>
       <Link href="/" className="btn btn--primary status-screen__link">
-        Grabar una nueva gota
+        {t.status.newDrop}
       </Link>
     </div>
   );

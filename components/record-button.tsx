@@ -1,6 +1,7 @@
 "use client";
 
 import { RecorderStatus } from "@/hooks/use-recorder";
+import { useI18n } from "@/lib/i18n/context";
 
 interface RecordButtonProps {
   status: RecorderStatus;
@@ -9,6 +10,7 @@ interface RecordButtonProps {
 }
 
 export function RecordButton({ status, onRecord, onStop }: RecordButtonProps) {
+  const { t } = useI18n();
   const isRecording = status === "recording";
   const isRequesting = status === "requesting";
   const isDisabled = isRequesting;
@@ -26,7 +28,7 @@ export function RecordButton({ status, onRecord, onStop }: RecordButtonProps) {
       className={`record-button${isRecording ? " record-button--recording" : ""}`}
       onClick={handleClick}
       disabled={isDisabled}
-      aria-label={isRecording ? "Detener grabación" : "Iniciar grabación"}
+      aria-label={isRecording ? t.record.stop : t.record.start}
       type="button"
     >
       {isRecording ? (

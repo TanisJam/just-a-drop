@@ -5,10 +5,12 @@ import { useRouter } from "next/navigation";
 import { useUpload } from "@/hooks/use-upload";
 import { AudioPreview } from "@/components/audio-preview";
 import { UploadProgress } from "@/components/upload-progress";
+import { useI18n } from "@/lib/i18n/context";
 import { getRecordingData, clearRecordingData } from "@/lib/recording-store";
 
 export default function PreviewPage() {
   const router = useRouter();
+  const { t } = useI18n();
   const recording = getRecordingData();
 
   const { status, progress, audioId, error, start } = useUpload({
@@ -45,8 +47,8 @@ export default function PreviewPage() {
       </header>
 
       <div className="screen__content">
-        <h2 className="screen__title">Escuchá antes de enviar</h2>
-        <p className="screen__subtitle">Una vez creada la gota, no se puede modificar</p>
+        <h2 className="screen__title">{t.preview.title}</h2>
+        <p className="screen__subtitle">{t.preview.subtitle}</p>
 
         <div className="card">
           <AudioPreview blob={recording.blob} />
@@ -54,7 +56,7 @@ export default function PreviewPage() {
 
         {error && (
           <div className="error-message" role="alert">
-            <p>Error al subir: {error}</p>
+            <p>{t.preview.uploadError(error)}</p>
           </div>
         )}
 
@@ -71,7 +73,7 @@ export default function PreviewPage() {
               type="button"
               disabled={isUploading}
             >
-              Regrabar
+              {t.preview.rerecord}
             </button>
             <button
               className="btn btn--primary"
@@ -79,7 +81,7 @@ export default function PreviewPage() {
               type="button"
               disabled={isUploading}
             >
-              Crear gota
+              {t.preview.create}
             </button>
           </div>
         )}

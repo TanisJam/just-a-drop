@@ -6,10 +6,13 @@ import { useRecorder } from "@/hooks/use-recorder";
 import { RecordButton } from "@/components/record-button";
 import { RecordingIndicator } from "@/components/recording-indicator";
 import { Fringe } from "@/components/fringe";
+import { LanguageToggle } from "@/components/language-toggle";
+import { useI18n } from "@/lib/i18n/context";
 import { setRecordingData } from "@/lib/recording-store";
 
 export default function Home() {
   const router = useRouter();
+  const { t } = useI18n();
   const { status, durationMs, blob, codec, start, stop, reset } = useRecorder();
 
   // When blob is ready, save to store and navigate to preview
@@ -29,20 +32,20 @@ export default function Home() {
       <div className="screen__content">
         {status === "denied" && (
           <div className="error-message" role="alert">
-            <p>No se pudo acceder al micrófono. Verificá los permisos en tu navegador.</p>
+            <p>{t.home.micDenied}</p>
             <button
               className="btn btn--ghost"
               onClick={reset}
               type="button"
             >
-              Intentar de nuevo
+              {t.home.tryAgain}
             </button>
           </div>
         )}
 
         {status === "unsupported" && (
           <div className="error-message" role="alert">
-            <p>Tu navegador no soporta la grabación de audio. Probá con Chrome o Firefox.</p>
+            <p>{t.home.unsupported}</p>
           </div>
         )}
 
@@ -60,8 +63,8 @@ export default function Home() {
         )}
 
         <div className="screen__tagline">
-          <h2 className="screen__title">Grabá una gota de voz</h2>
-          <p className="screen__subtitle">Se escucha una sola vez</p>
+          <h2 className="screen__title">{t.home.title}</h2>
+          <p className="screen__subtitle">{t.home.subtitle}</p>
         </div>
 
         <Fringe />
@@ -69,10 +72,13 @@ export default function Home() {
 
       <footer className="footer">
         <nav className="footer__links" aria-label="Legal">
-          <a href="/privacy" className="footer__link">Privacidad</a>
+          <a href="/privacy" className="footer__link">{t.common.privacy}</a>
           <span className="footer__separator" aria-hidden="true">·</span>
-          <a href="/terms" className="footer__link">Términos</a>
+          <a href="/terms" className="footer__link">{t.common.terms}</a>
         </nav>
+        <div className="footer__lang">
+          <LanguageToggle />
+        </div>
       </footer>
     </main>
   );

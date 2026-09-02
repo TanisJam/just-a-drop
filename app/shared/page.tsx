@@ -6,10 +6,12 @@ import Link from "next/link";
 import { DropAnimation } from "@/components/drop-animation";
 import { CopyLink } from "@/components/copy-link";
 import { ShareButton } from "@/components/share-button";
+import { useI18n } from "@/lib/i18n/context";
 
 function SharedPageContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
+  const { t } = useI18n();
   const audioId = searchParams.get("id");
 
   const [shareableUrl, setShareableUrl] = useState<string>("");
@@ -31,10 +33,8 @@ function SharedPageContent() {
       <div className="screen__content">
         <DropAnimation />
 
-        <h2 className="screen__title">¡Tu gota está lista!</h2>
-        <p className="screen__subtitle">
-          Se eliminará en 24h si nadie la escucha
-        </p>
+        <h2 className="screen__title">{t.shared.ready}</h2>
+        <p className="screen__subtitle">{t.shared.expiresNote}</p>
 
         <div className="card">
           <CopyLink url={shareableUrl} />
@@ -44,7 +44,7 @@ function SharedPageContent() {
 
       <footer className="footer">
         <Link href="/" className="footer__link">
-          Grabar otra gota
+          {t.shared.recordAnother}
         </Link>
       </footer>
     </>

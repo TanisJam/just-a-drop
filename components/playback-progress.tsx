@@ -1,6 +1,7 @@
 "use client";
 
 import { PlayerProgress } from "@/hooks/use-player";
+import { useI18n } from "@/lib/i18n/context";
 
 interface PlaybackProgressProps {
   progress: PlayerProgress;
@@ -14,6 +15,7 @@ function formatMs(ms: number): string {
 }
 
 export function PlaybackProgress({ progress }: PlaybackProgressProps) {
+  const { t } = useI18n();
   const { elapsed, total } = progress;
   const percent = total > 0 ? Math.min(100, Math.round((elapsed / total) * 100)) : 0;
 
@@ -29,7 +31,7 @@ export function PlaybackProgress({ progress }: PlaybackProgressProps) {
         aria-valuenow={percent}
         aria-valuemin={0}
         aria-valuemax={100}
-        aria-label="Progreso de reproducción"
+        aria-label={t.listen.progress}
       >
         <div className="progress-bar__fill" style={{ width: `${percent}%` }} />
       </div>

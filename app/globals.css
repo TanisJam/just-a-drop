@@ -37,6 +37,9 @@
   --color-error: #b23a20; /* terracotta clay */
   --color-error-hover: #983018;
   --color-white: #ffffff;
+  /* Text/icon colour that sits ON a filled brand surface */
+  --color-on-primary: #ffffff;
+  --color-on-accent: #17352a;
 
   /* Lines */
   --color-border: #d8cdb8;
@@ -125,6 +128,8 @@
     --color-error: #e07a5f;
     --color-error-hover: #eb8d74;
     --color-white: #ffffff;
+    --color-on-primary: #0c1f17;
+    --color-on-accent: #10201a;
 
     --color-border: #2c4a3a;
     --color-border-soft: rgba(234, 227, 211, 0.12);
@@ -319,6 +324,45 @@ button:disabled {
 }
 
 /* ------------------------------------------------------------
+   Language toggle
+   ------------------------------------------------------------ */
+.footer__lang {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--space-sm);
+}
+
+.lang-toggle {
+  display: inline-flex;
+  gap: 2px;
+  padding: 3px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+}
+
+.lang-toggle__btn {
+  font-family: var(--font-display);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--color-text-muted);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-full);
+  transition: background-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.lang-toggle__btn:hover:not(.lang-toggle__btn--active) {
+  color: var(--color-text);
+}
+
+.lang-toggle__btn--active {
+  background-color: var(--color-primary);
+  color: var(--color-on-primary);
+}
+
+/* ------------------------------------------------------------
    Document / prose pages (Privacidad, Términos)
    ------------------------------------------------------------ */
 .screen--doc {
@@ -418,7 +462,7 @@ button:disabled {
 
 .btn--primary {
   background-color: var(--color-primary);
-  color: var(--color-white);
+  color: var(--color-on-primary);
   width: 100%;
   box-shadow: var(--shadow-soft);
 }
@@ -453,7 +497,7 @@ button:disabled {
 
 .btn--share {
   background-color: var(--color-accent);
-  color: var(--color-ink);
+  color: var(--color-on-accent);
   width: 100%;
   margin-top: var(--space-sm);
   box-shadow: var(--shadow-soft);
@@ -589,7 +633,7 @@ button:disabled {
   height: 120px;
   border-radius: 50%;
   background-color: var(--color-primary);
-  color: var(--color-white);
+  color: var(--color-on-primary);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -977,7 +1021,7 @@ button:disabled {
   left: 50%;
   transform: translateX(-50%) translateY(100px);
   background-color: var(--color-ink);
-  color: var(--color-white);
+  color: var(--color-bg);
   padding: var(--space-sm) var(--space-lg);
   border-radius: var(--radius-full);
   font-family: var(--font-display);

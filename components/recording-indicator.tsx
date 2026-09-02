@@ -1,5 +1,7 @@
 "use client";
 
+import { useI18n } from "@/lib/i18n/context";
+
 interface RecordingIndicatorProps {
   durationMs: number;
 }
@@ -12,8 +14,9 @@ function formatDuration(ms: number): string {
 }
 
 export function RecordingIndicator({ durationMs }: RecordingIndicatorProps) {
+  const { t } = useI18n();
   return (
-    <div className="recording-indicator" aria-live="off" aria-label={`Duración: ${formatDuration(durationMs)}`}>
+    <div className="recording-indicator" aria-live="off" aria-label={t.record.duration(formatDuration(durationMs))}>
       <span className="recording-indicator__dot" aria-hidden="true" />
       <span className="recording-indicator__time">{formatDuration(durationMs)}</span>
     </div>

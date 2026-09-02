@@ -1,11 +1,15 @@
 "use client";
 
+import { useI18n } from "@/lib/i18n/context";
+
 interface PlayButtonProps {
   onPlay: () => void;
   disabled?: boolean;
 }
 
 export function PlayButton({ onPlay, disabled = false }: PlayButtonProps) {
+  const { t } = useI18n();
+
   function suppressContextMenu(e: React.MouseEvent) {
     e.preventDefault();
   }
@@ -13,14 +17,14 @@ export function PlayButton({ onPlay, disabled = false }: PlayButtonProps) {
   return (
     <div className="play-button-wrapper" onContextMenu={suppressContextMenu}>
       <div className="warning-box">
-        <p>⚠️ Este audio se escucha <strong>una sola vez</strong>. Una vez que presiones play, no podrás volver a escucharlo.</p>
+        <p>⚠️ {t.play.warningPre}<strong>{t.play.warningStrong}</strong>{t.play.warningPost}</p>
       </div>
       <button
         className="play-button"
         onClick={onPlay}
         disabled={disabled}
         type="button"
-        aria-label="Reproducir audio"
+        aria-label={t.play.ariaPlay}
         onContextMenu={suppressContextMenu}
       >
         {/* Play triangle */}

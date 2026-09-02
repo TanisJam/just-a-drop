@@ -8,6 +8,7 @@ import { PlayButton } from "@/components/play-button";
 import { PlaybackProgress } from "@/components/playback-progress";
 import { StatusScreen } from "@/components/status-screen";
 import { Fringe } from "@/components/fringe";
+import { useI18n } from "@/lib/i18n/context";
 
 interface ListenClientProps {
   audioId: string;
@@ -30,6 +31,7 @@ export function ListenClient({ audioId }: ListenClientProps) {
   const durationMsRef = useRef<number>(0);
 
   const { status: playerStatus, progress, startPlayback } = usePlayer();
+  const { t } = useI18n();
 
   // Fetch metadata on mount
   useEffect(() => {
@@ -52,7 +54,7 @@ export function ListenClient({ audioId }: ListenClientProps) {
         } else {
           setScreen({
             type: "error",
-            message: err instanceof Error ? err.message : "Error desconocido",
+            message: err instanceof Error ? err.message : t.listen.unknownError,
           });
         }
       });
@@ -63,7 +65,7 @@ export function ListenClient({ audioId }: ListenClientProps) {
     if (playerStatus === "finished") {
       setScreen({ type: "finished" });
     } else if (playerStatus === "error") {
-      setScreen({ type: "error", message: "Error durante la reproducción" });
+      setScreen({ type: "error", message: t.listen.playbackError });
     }
   }, [playerStatus]);
 
@@ -92,7 +94,7 @@ export function ListenClient({ audioId }: ListenClientProps) {
       } else {
         setScreen({
           type: "error",
-          message: err instanceof Error ? err.message : "No se pudo iniciar la reproducción",
+          message: err instanceof Error ? err.message : t.listen.startError,
         });
       }
     }
@@ -105,7 +107,7 @@ export function ListenClient({ audioId }: ListenClientProps) {
   if (screen.type === "loading") {
     return (
       <main className="screen">
-        <div className="skeleton" aria-label="Cargando…">
+        <div className="skeleton" aria-label={t.listen.loading}>
           <div className="skeleton__block skeleton__block--title" />
           <div className="skeleton__block skeleton__block--button" />
         </div>
@@ -140,7 +142,7 @@ export function ListenClient({ audioId }: ListenClientProps) {
               <circle cx="22" cy="32.5" r="1.6" fill="currentColor" />
             </svg>
           </div>
-          <h1 className="status-screen__title">Algo salió mal</h1>
+          <h1 className="status-screen__title">{t.listen.errorTitle}</h1>
           <p className="status-screen__description">{screen.message}</p>
         </div>
       </main>
@@ -157,10 +159,8 @@ export function ListenClient({ audioId }: ListenClientProps) {
               <path d="M16 27.5l4 4 8-8.5" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </div>
-          <h1 className="status-screen__title">Este drop fue escuchado</h1>
-          <p className="status-screen__description">
-            No podrás volver a escucharlo. Así funciona JustADrop.
-          </p>
+          <h1 className="status-screen__title">{t.listen.finishedTitle}</h1>
+          <p className="status-screen__description">{t.listen.finishedDesc}</p>
         </div>
       </main>
     );
@@ -173,7 +173,7 @@ export function ListenClient({ audioId }: ListenClientProps) {
           <h1 className="header__logo">JustADrop</h1>
         </header>
         <div className="screen__content">
-          <h2 className="screen__title">Escuchando…</h2>
+          <h2 className="screen__title">{t.listen.listening}</h2>
           <PlaybackProgress progress={progress} />
         </div>
       </main>
@@ -188,7 +188,7 @@ export function ListenClient({ audioId }: ListenClientProps) {
       </header>
       <div className="screen__content">
         <PlayButton onPlay={handlePlay} />
-        <h2 className="screen__title">Alguien te mandó una gota de voz</h2>
+        <h2 className="screen__title">{t.listen.fromSomeone}</h2>
         <Fringe />
       </div>
     </main>

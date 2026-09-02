@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, Inter } from "next/font/google";
+import { LanguageProvider } from "@/lib/i18n/context";
 import "./globals.css";
 
 const displayFont = Space_Grotesk({
@@ -35,7 +36,7 @@ export default function RootLayout({
       <body>
         <div className="vine vine--left" aria-hidden="true" />
         <div className="vine vine--right" aria-hidden="true" />
-        {children}
+        <LanguageProvider>{children}</LanguageProvider>
       </body>
     </html>
   );
