@@ -599,29 +599,6 @@ button:disabled {
   }
 }
 
-/* Fringe threads drifting — the message hanging by a thread, ephemeral */
-@keyframes sway {
-  0%,
-  100% {
-    transform: rotate(-3.5deg);
-  }
-  50% {
-    transform: rotate(3.5deg);
-  }
-}
-
-@keyframes twinkle {
-  0%,
-  100% {
-    opacity: 0.35;
-    transform: scale(0.85);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
 /* ------------------------------------------------------------
    Record / Play Button — shared "seed" control
    Forest-green disc resting in a soft organic halo
@@ -1110,43 +1087,130 @@ button:disabled {
   }
 }
 
-/* Ephemeral fringe — threads that hang by a moment, then drift and fade */
+/* Ephemeral fringe — a canvas-rendered string instrument that hangs from the
+   layout. Physics + audio live in lib/fringe/harp-engine; this is just its
+   stage. Pointer events are handled on the canvas itself. */
 .fringe {
+  width: 100%;
+  max-width: 440px;
+  height: 120px;
+  margin-inline: auto;
+}
+
+.fringe__canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  /* Let drags sweep the strings without scrolling the page. */
+  touch-action: none;
+  cursor: crosshair;
+}
+
+/* ------------------------------------------------------------
+   Fringe Lab — dev-only tuning playground (/fringe-lab)
+   ------------------------------------------------------------ */
+.lab {
+  max-width: 640px;
+  margin-inline: auto;
+  padding: var(--space-lg, 1.5rem) var(--space-md, 1rem) 4rem;
+}
+
+.lab__head {
+  text-align: center;
+  margin-bottom: var(--space-md, 1rem);
+}
+
+.lab__title {
+  font-size: var(--font-size-xl, 1.5rem);
+  color: var(--color-text, #17352a);
+  margin: 0;
+}
+
+.lab__sub {
+  color: var(--color-text-muted, #556052);
+  font-size: 0.875rem;
+  margin: 0.25rem 0 0;
+}
+
+.lab__stage {
   display: flex;
   justify-content: center;
-  align-items: flex-start;
-  gap: 7px;
+  padding: var(--space-md, 1rem);
+  margin-bottom: var(--space-lg, 1.5rem);
+  border: 1px solid var(--color-primary-pale, #e2ecdf);
+  border-radius: var(--radius-lg, 1.5rem);
+  background: color-mix(in srgb, var(--color-bg, #f4ede0) 60%, transparent);
+}
+
+.lab__controls {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-md, 1rem);
+}
+
+.lab__row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.lab__label {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-text, #17352a);
+}
+
+.lab__value {
+  font-variant-numeric: tabular-nums;
+  color: var(--color-primary, #1b5e43);
+}
+
+.lab__range {
   width: 100%;
-  max-width: 320px;
-  height: 42px;
-  pointer-events: none;
+  accent-color: var(--color-primary, #1b5e43);
+  touch-action: none;
 }
 
-.fringe__thread {
-  width: 2px;
-  border-radius: 2px;
-  background: linear-gradient(
-    to bottom,
-    var(--color-primary-light),
-    transparent
-  );
-  transform-origin: top center;
-  animation: sway 6s ease-in-out infinite;
-  position: relative;
+.lab__hint {
+  font-size: 0.72rem;
+  color: var(--color-text-muted, #556052);
 }
 
-.fringe__thread::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  bottom: 0;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  transform: translate(-50%, 40%);
-  background: var(--bead, var(--color-accent));
-  box-shadow: 0 0 7px 0 var(--bead, var(--color-accent));
-  animation: twinkle 3.2s ease-in-out infinite;
+.lab__actions {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-sm, 0.75rem);
+  margin-top: var(--space-sm, 0.75rem);
+}
+
+.lab__toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-text, #17352a);
+}
+
+.lab__btn {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--color-primary, #1b5e43);
+  border-radius: var(--radius-full, 9999px);
+  background: transparent;
+  color: var(--color-primary, #1b5e43);
+  font: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.lab__btn:hover {
+  background: var(--color-primary-pale, #e2ecdf);
 }
 
 /* ------------------------------------------------------------
