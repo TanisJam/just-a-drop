@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useRecorder } from "@/hooks/use-recorder";
 import { RecordButton } from "@/components/record-button";
 import { RecordingIndicator } from "@/components/recording-indicator";
+import { Fringe } from "@/components/fringe";
 import { setRecordingData } from "@/lib/recording-store";
 
 export default function Home() {
@@ -26,11 +27,6 @@ export default function Home() {
       </header>
 
       <div className="screen__content">
-        <div className="screen__tagline">
-          <h2 className="screen__title">Grabá una gota de voz</h2>
-          <p className="screen__subtitle">Se escucha una sola vez</p>
-        </div>
-
         {status === "denied" && (
           <div className="error-message" role="alert">
             <p>No se pudo acceder al micrófono. Verificá los permisos en tu navegador.</p>
@@ -62,6 +58,13 @@ export default function Home() {
             )}
           </>
         )}
+
+        <div className="screen__tagline">
+          <h2 className="screen__title">Grabá una gota de voz</h2>
+          <p className="screen__subtitle">Se escucha una sola vez</p>
+        </div>
+
+        <Fringe />
       </div>
 
       <footer className="footer">

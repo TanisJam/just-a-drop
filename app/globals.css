@@ -1,25 +1,51 @@
 /* ============================================================
    JustADrop — Design System
-   Brand: Citric / Mandarin
+   Brand: Solarpunk / Grounded Modern
+   Cream paper · deep forest green · solar ochre · terracotta
+   Type: Space Grotesk (display) + Inter (body)
    ============================================================ */
 
 /* ------------------------------------------------------------
-   7.1 CSS Custom Properties & Theme
+   7.1 Design Tokens & Theme
    ------------------------------------------------------------ */
 :root {
-  --color-primary: #e8820c;
-  --color-primary-light: #f5a623;
-  --color-primary-pale: #fdebd0;
-  --color-accent: #5c2d0c;
-  --color-bg: #fff8f0;
-  --color-surface: #fff0e5;
-  --color-text: #3d1f0a;
-  --color-text-muted: #8b6d5c;
-  --color-success: #7cb342;
-  --color-error: #d32f2f;
+  /* Brand — forest green */
+  --color-primary: #1b5e43;
+  --color-primary-hover: #164c36;
+  --color-primary-light: #3e8e68;
+  --color-primary-pale: #e2ecdf;
+
+  /* Accent — solar ochre */
+  --color-accent: #d99a2b;
+  --color-accent-hover: #c2851b;
+  --color-accent-pale: #f6e8c9;
+
+  /* Deep pine — used for high-emphasis text & dark surfaces */
+  --color-ink: #17352a;
+
+  /* Surfaces — warm paper */
+  --color-bg: #f4ede0;
+  --color-surface: #fcf8ef;
+  --color-surface-sunk: #efe7d6;
+
+  /* Text */
+  --color-text: #17352a;
+  --color-text-muted: #556052;
+
+  /* Semantic */
+  --color-success: #2e7d4f;
+  --color-error: #b23a20; /* terracotta clay */
+  --color-error-hover: #983018;
   --color-white: #ffffff;
 
-  --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  /* Lines */
+  --color-border: #d8cdb8;
+  --color-border-soft: rgba(23, 53, 42, 0.12);
+
+  /* Typography */
+  --font-display: "Space Grotesk", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-family: var(--font-body, "Inter"), -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, sans-serif;
   --font-size-xs: 0.75rem;
   --font-size-sm: 0.875rem;
   --font-size-base: 1rem;
@@ -28,6 +54,7 @@
   --font-size-2xl: 2rem;
   --font-size-3xl: 2.5rem;
 
+  /* Spacing */
   --space-xs: 0.25rem;
   --space-sm: 0.5rem;
   --space-md: 1rem;
@@ -36,14 +63,84 @@
   --space-2xl: 3rem;
   --space-3xl: 4rem;
 
-  --radius-sm: 0.5rem;
+  /* Radii — organic, slightly asymmetric where it counts */
+  --radius-sm: 0.625rem;
   --radius-md: 1rem;
   --radius-lg: 1.5rem;
   --radius-full: 9999px;
+  --radius-blob: 42% 58% 63% 37% / 45% 42% 58% 55%;
 
+  /* Motion */
   --transition-fast: 150ms ease;
   --transition-base: 250ms ease;
-  --shadow-soft: 0 4px 20px rgba(232, 130, 12, 0.1);
+
+  /* Elevation — soft, green-tinted */
+  --shadow-soft: 0 6px 22px rgba(23, 53, 42, 0.1);
+  --shadow-lifted: 0 12px 34px rgba(23, 53, 42, 0.14);
+
+  /* Ambient landscape glow (sun above, forest below) */
+  --glow-sun: rgba(217, 154, 43, 0.14);
+  --glow-forest: rgba(27, 94, 67, 0.1);
+
+  /* Iridescent "horizon" — sunset melting into aurora.
+     The ephemeral, hand-embroidered layer of the system. */
+  --aurora-gold: #f0be4e;
+  --aurora-rose: #e59ab0;
+  --aurora-lav: #b6a4dd;
+  --aurora-teal: #74c3b2;
+  --gradient-horizon: linear-gradient(
+    100deg,
+    var(--aurora-gold),
+    var(--aurora-rose) 38%,
+    var(--aurora-lav) 66%,
+    var(--aurora-teal)
+  );
+  --sun-ray: rgba(217, 154, 43, 0.5);
+}
+
+/* ------------------------------------------------------------
+   Dark mode — solarpunk night (deep pine + moss + warm sun)
+   ------------------------------------------------------------ */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-primary: #4fa97c;
+    --color-primary-hover: #63b98e;
+    --color-primary-light: #78c79e;
+    --color-primary-pale: #1e3a2d;
+
+    --color-accent: #e8b24c;
+    --color-accent-hover: #f0c069;
+    --color-accent-pale: #3a3117;
+
+    --color-ink: #eae3d3;
+
+    --color-bg: #10201a;
+    --color-surface: #182e24;
+    --color-surface-sunk: #14271f;
+
+    --color-text: #eae3d3;
+    --color-text-muted: #9db0a0;
+
+    --color-success: #5cbe85;
+    --color-error: #e07a5f;
+    --color-error-hover: #eb8d74;
+    --color-white: #ffffff;
+
+    --color-border: #2c4a3a;
+    --color-border-soft: rgba(234, 227, 211, 0.12);
+
+    --shadow-soft: 0 6px 22px rgba(0, 0, 0, 0.4);
+    --shadow-lifted: 0 12px 34px rgba(0, 0, 0, 0.5);
+
+    --glow-sun: rgba(232, 178, 76, 0.1);
+    --glow-forest: rgba(79, 169, 124, 0.12);
+
+    --aurora-gold: #f0c469;
+    --aurora-rose: #e7a6bd;
+    --aurora-lav: #c3b3e6;
+    --aurora-teal: #7fceba;
+    --sun-ray: rgba(232, 178, 76, 0.45);
+  }
 }
 
 /* ------------------------------------------------------------
@@ -58,8 +155,13 @@
 body {
   margin: 0;
   font-family: var(--font-family);
-  background-color: var(--color-bg);
   color: var(--color-text);
+  background-color: var(--color-bg);
+  /* Ambient solarpunk landscape: sun glow up top, forest glow below */
+  background-image:
+    radial-gradient(125% 80% at 50% -12%, var(--glow-sun), transparent 60%),
+    radial-gradient(110% 55% at 50% 112%, var(--glow-forest), transparent 55%);
+  background-attachment: fixed;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -71,7 +173,9 @@ h4,
 h5,
 h6 {
   margin: 0;
-  line-height: 1.2;
+  line-height: 1.15;
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
 }
 
 p {
@@ -97,7 +201,13 @@ button {
 
 button:disabled {
   cursor: not-allowed;
-  opacity: 0.6;
+  opacity: 0.5;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-primary-light);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
 }
 
 /* ------------------------------------------------------------
@@ -133,9 +243,10 @@ button:disabled {
 }
 
 .screen__title {
-  font-size: var(--font-size-xl);
+  font-size: var(--font-size-2xl);
   font-weight: 700;
-  color: var(--color-accent);
+  color: var(--color-primary);
+  letter-spacing: -0.03em;
 }
 
 .screen__subtitle {
@@ -154,10 +265,24 @@ button:disabled {
 }
 
 .header__logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  font-family: var(--font-display);
   font-size: var(--font-size-lg);
-  font-weight: 800;
+  font-weight: 700;
   color: var(--color-primary);
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
+}
+
+/* Little water-drop mark before the logo */
+.header__logo::before {
+  content: "";
+  width: 0.7em;
+  height: 0.9em;
+  background-color: var(--color-accent);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  flex-shrink: 0;
 }
 
 /* ------------------------------------------------------------
@@ -194,6 +319,78 @@ button:disabled {
 }
 
 /* ------------------------------------------------------------
+   Document / prose pages (Privacidad, Términos)
+   ------------------------------------------------------------ */
+.screen--doc {
+  max-width: 680px;
+  justify-content: flex-start;
+}
+
+.header--doc {
+  align-self: center;
+}
+
+.prose {
+  flex: 1;
+  width: 100%;
+  max-width: 62ch;
+  margin: 0 auto;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  padding: var(--space-lg) 0 var(--space-2xl);
+}
+
+.prose__title {
+  font-size: var(--font-size-3xl);
+  font-weight: 700;
+  color: var(--color-primary);
+  letter-spacing: -0.03em;
+}
+
+.prose__meta {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  margin-top: calc(-1 * var(--space-sm));
+}
+
+.prose__lead {
+  font-size: var(--font-size-lg);
+  color: var(--color-text);
+  line-height: 1.5;
+}
+
+.prose h2 {
+  font-family: var(--font-display);
+  font-size: var(--font-size-xl);
+  color: var(--color-text);
+  margin-top: var(--space-lg);
+}
+
+.prose p {
+  color: var(--color-text);
+}
+
+.prose ul {
+  margin: 0;
+  padding-left: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  color: var(--color-text);
+}
+
+.prose li {
+  line-height: 1.6;
+}
+
+.prose strong {
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+/* ------------------------------------------------------------
    Buttons — BEM variant system
    ------------------------------------------------------------ */
 .btn {
@@ -203,10 +400,14 @@ button:disabled {
   gap: var(--space-sm);
   padding: var(--space-md) var(--space-xl);
   border-radius: var(--radius-full);
+  font-family: var(--font-display);
   font-size: var(--font-size-base);
   font-weight: 600;
+  letter-spacing: -0.01em;
   line-height: 1;
-  transition: background-color var(--transition-fast), transform var(--transition-fast), opacity var(--transition-fast);
+  transition: background-color var(--transition-fast),
+    border-color var(--transition-fast), transform var(--transition-fast),
+    box-shadow var(--transition-fast), opacity var(--transition-fast);
   white-space: nowrap;
   text-decoration: none;
 }
@@ -216,23 +417,27 @@ button:disabled {
 }
 
 .btn--primary {
-  background-color: var(--color-accent);
+  background-color: var(--color-primary);
   color: var(--color-white);
   width: 100%;
+  box-shadow: var(--shadow-soft);
 }
 
 .btn--primary:hover:not(:disabled) {
-  background-color: #7a3d10;
+  background-color: var(--color-primary-hover);
+  box-shadow: var(--shadow-lifted);
+  text-decoration: none;
 }
 
 .btn--secondary {
   background-color: transparent;
-  color: var(--color-accent);
-  border: 2px solid var(--color-accent);
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
 }
 
 .btn--secondary:hover:not(:disabled) {
   background-color: var(--color-primary-pale);
+  text-decoration: none;
 }
 
 .btn--ghost {
@@ -243,17 +448,21 @@ button:disabled {
 
 .btn--ghost:hover:not(:disabled) {
   color: var(--color-text);
+  text-decoration: none;
 }
 
 .btn--share {
-  background-color: var(--color-success);
-  color: var(--color-white);
+  background-color: var(--color-accent);
+  color: var(--color-ink);
   width: 100%;
   margin-top: var(--space-sm);
+  box-shadow: var(--shadow-soft);
 }
 
 .btn--share:hover:not(:disabled) {
-  background-color: #689f38;
+  background-color: var(--color-accent-hover);
+  box-shadow: var(--shadow-lifted);
+  text-decoration: none;
 }
 
 /* Button sizes */
@@ -273,18 +482,18 @@ button:disabled {
 @keyframes pulse-ring {
   0% {
     box-shadow:
-      0 0 0 0 rgba(232, 130, 12, 0.6),
-      0 0 0 0 rgba(232, 130, 12, 0.3);
+      0 0 0 0 rgba(178, 58, 32, 0.5),
+      0 0 0 0 rgba(178, 58, 32, 0.28);
   }
   70% {
     box-shadow:
-      0 0 0 16px rgba(232, 130, 12, 0),
-      0 0 0 32px rgba(232, 130, 12, 0);
+      0 0 0 16px rgba(178, 58, 32, 0),
+      0 0 0 32px rgba(178, 58, 32, 0);
   }
   100% {
     box-shadow:
-      0 0 0 0 rgba(232, 130, 12, 0),
-      0 0 0 0 rgba(232, 130, 12, 0);
+      0 0 0 0 rgba(178, 58, 32, 0),
+      0 0 0 0 rgba(178, 58, 32, 0);
   }
 }
 
@@ -330,10 +539,52 @@ button:disabled {
   }
 }
 
+@keyframes blob-morph {
+  0%,
+  100% {
+    border-radius: 42% 58% 63% 37% / 45% 42% 58% 55%;
+  }
+  50% {
+    border-radius: 58% 42% 38% 62% / 55% 58% 42% 45%;
+  }
+}
+
+@keyframes sun-rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Fringe threads drifting — the message hanging by a thread, ephemeral */
+@keyframes sway {
+  0%,
+  100% {
+    transform: rotate(-3.5deg);
+  }
+  50% {
+    transform: rotate(3.5deg);
+  }
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(0.85);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 /* ------------------------------------------------------------
-   Record Button
+   Record / Play Button — shared "seed" control
+   Forest-green disc resting in a soft organic halo
    ------------------------------------------------------------ */
-.record-button {
+.record-button,
+.play-button {
+  position: relative;
   width: 120px;
   height: 120px;
   border-radius: 50%;
@@ -344,20 +595,74 @@ button:disabled {
   justify-content: center;
   border: none;
   cursor: pointer;
-  transition: transform var(--transition-fast), background-color var(--transition-fast);
+  transition: transform var(--transition-fast),
+    background-color var(--transition-fast), box-shadow var(--transition-fast);
   box-shadow:
-    0 0 0 8px rgba(232, 130, 12, 0.2),
-    0 0 0 16px rgba(232, 130, 12, 0.1),
+    0 0 0 8px var(--color-primary-pale),
+    0 0 0 16px var(--color-accent-pale),
     var(--shadow-soft);
   flex-shrink: 0;
 }
 
-.record-button:hover:not(:disabled) {
-  transform: scale(1.05);
-  background-color: var(--color-primary-light);
+.play-button {
+  /* Prevent context menu / long-press save */
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
 }
 
-.record-button:active:not(:disabled) {
+/* Radiant embroidered-sun rays behind the control (disc covers the busy centre) */
+.record-button::before,
+.play-button::before {
+  content: "";
+  position: absolute;
+  inset: -38px;
+  z-index: -2;
+  border-radius: 50%;
+  background: repeating-conic-gradient(
+    from 0deg,
+    var(--sun-ray) 0deg 3.5deg,
+    transparent 3.5deg 11deg
+  );
+  -webkit-mask: radial-gradient(circle, #000 30%, transparent 72%);
+  mask: radial-gradient(circle, #000 30%, transparent 72%);
+  opacity: 0.9;
+  animation: sun-rotate 55s linear infinite;
+}
+
+/* Recording state: rays glow terracotta, not sun */
+.record-button--recording::before {
+  --sun-ray: rgba(178, 58, 32, 0.4);
+}
+
+/* Soft morphing organic halo behind the control */
+.record-button::after,
+.play-button::after {
+  content: "";
+  position: absolute;
+  inset: -34px;
+  z-index: -1;
+  background: radial-gradient(
+    circle at 50% 40%,
+    var(--glow-sun),
+    transparent 70%
+  );
+  border-radius: var(--radius-blob);
+  animation: blob-morph 12s ease-in-out infinite;
+}
+
+.record-button:hover:not(:disabled),
+.play-button:hover:not(:disabled) {
+  transform: scale(1.05);
+  background-color: var(--color-primary-light);
+  box-shadow:
+    0 0 0 8px var(--color-primary-pale),
+    0 0 0 16px var(--color-accent-pale),
+    var(--shadow-lifted);
+}
+
+.record-button:active:not(:disabled),
+.play-button:active:not(:disabled) {
   transform: scale(0.97);
 }
 
@@ -365,12 +670,12 @@ button:disabled {
   background-color: var(--color-error);
   animation: pulse-ring 1.5s ease-out infinite;
   box-shadow:
-    0 0 0 8px rgba(211, 47, 47, 0.2),
-    0 0 0 16px rgba(211, 47, 47, 0.1);
+    0 0 0 8px rgba(178, 58, 32, 0.18),
+    0 0 0 16px rgba(178, 58, 32, 0.08);
 }
 
 .record-button--recording:hover:not(:disabled) {
-  background-color: #c62828;
+  background-color: var(--color-error-hover);
 }
 
 /* ------------------------------------------------------------
@@ -380,6 +685,7 @@ button:disabled {
   display: flex;
   align-items: center;
   gap: var(--space-sm);
+  font-family: var(--font-display);
   font-size: var(--font-size-lg);
   font-weight: 600;
   color: var(--color-error);
@@ -400,7 +706,7 @@ button:disabled {
 }
 
 /* ------------------------------------------------------------
-   Play Button
+   Play Button wrapper
    ------------------------------------------------------------ */
 .play-button-wrapper {
   display: flex;
@@ -410,51 +716,20 @@ button:disabled {
   width: 100%;
 }
 
-.play-button {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  background-color: var(--color-primary);
-  color: var(--color-white);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  cursor: pointer;
-  transition: transform var(--transition-fast), background-color var(--transition-fast);
-  box-shadow:
-    0 0 0 8px rgba(232, 130, 12, 0.2),
-    0 0 0 16px rgba(232, 130, 12, 0.1),
-    var(--shadow-soft);
-  flex-shrink: 0;
-  /* Prevent context menu / right-click */
-  -webkit-user-select: none;
-  user-select: none;
-  -webkit-touch-callout: none;
-}
-
-.play-button:hover:not(:disabled) {
-  transform: scale(1.05);
-  background-color: var(--color-primary-light);
-}
-
-.play-button:active:not(:disabled) {
-  transform: scale(0.97);
-}
-
 /* ------------------------------------------------------------
    Warning Box
    ------------------------------------------------------------ */
 .warning-box {
-  background-color: #fff3e0;
-  border: 1px solid var(--color-primary-pale);
-  border-left: 4px solid var(--color-primary);
+  background-color: var(--color-accent-pale);
+  /* Hand-stitched dashed seam */
+  border: 1.5px dashed var(--color-accent);
+  border-left: 4px solid var(--color-accent);
   border-radius: var(--radius-sm);
   padding: var(--space-md);
   max-width: 340px;
   text-align: left;
   font-size: var(--font-size-sm);
-  color: var(--color-accent);
+  color: var(--color-ink);
   line-height: 1.5;
 }
 
@@ -463,15 +738,15 @@ button:disabled {
    ------------------------------------------------------------ */
 .progress-bar {
   width: 100%;
-  height: 6px;
-  background-color: var(--color-primary-pale);
+  height: 8px;
+  background-color: var(--color-surface-sunk);
   border-radius: var(--radius-full);
   overflow: hidden;
 }
 
 .progress-bar__fill {
   height: 100%;
-  background-color: var(--color-primary);
+  background-image: var(--gradient-horizon);
   border-radius: var(--radius-full);
   transition: width var(--transition-base);
 }
@@ -519,10 +794,11 @@ button:disabled {
 }
 
 /* ------------------------------------------------------------
-   Card
+   Card — organic paper surface
    ------------------------------------------------------------ */
 .card {
   background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   padding: var(--space-lg);
   width: 100%;
@@ -551,8 +827,8 @@ button:disabled {
 }
 
 .copy-link-field {
-  background-color: var(--color-white);
-  border: 1px solid rgba(92, 45, 12, 0.15);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
   padding: var(--space-sm) var(--space-md);
   overflow: hidden;
@@ -590,7 +866,11 @@ button:disabled {
 .drop-animation__drop {
   width: 40px;
   height: 52px;
-  background-color: var(--color-primary);
+  background-image: linear-gradient(
+    160deg,
+    var(--color-primary-light),
+    var(--color-primary)
+  );
   border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
   position: relative;
   animation: drop-fall 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
@@ -606,7 +886,7 @@ button:disabled {
   height: 0;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
-  border-bottom: 20px solid var(--color-primary);
+  border-bottom: 20px solid var(--color-primary-light);
 }
 
 /* ------------------------------------------------------------
@@ -622,14 +902,31 @@ button:disabled {
 }
 
 .status-screen__icon {
-  font-size: 4rem;
-  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 96px;
+  height: 96px;
+  color: var(--color-primary);
+  background-color: var(--color-primary-pale);
+  border-radius: var(--radius-blob);
+  animation: blob-morph 14s ease-in-out infinite;
+}
+
+.status-screen__icon svg {
+  width: 44px;
+  height: 44px;
+}
+
+.status-screen__icon--alert {
+  color: var(--color-error);
+  background-color: color-mix(in srgb, var(--color-error) 14%, transparent);
 }
 
 .status-screen__title {
-  font-size: var(--font-size-xl);
+  font-size: var(--font-size-2xl);
   font-weight: 700;
-  color: var(--color-accent);
+  color: var(--color-primary);
 }
 
 .status-screen__description {
@@ -657,8 +954,9 @@ button:disabled {
    Error Message
    ------------------------------------------------------------ */
 .error-message {
-  background-color: #ffebee;
-  border: 1px solid #ef9a9a;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-error);
+  border-left: 4px solid var(--color-error);
   border-radius: var(--radius-sm);
   padding: var(--space-md);
   text-align: center;
@@ -678,10 +976,11 @@ button:disabled {
   bottom: var(--space-xl);
   left: 50%;
   transform: translateX(-50%) translateY(100px);
-  background-color: var(--color-accent);
+  background-color: var(--color-ink);
   color: var(--color-white);
   padding: var(--space-sm) var(--space-lg);
   border-radius: var(--radius-full);
+  font-family: var(--font-display);
   font-size: var(--font-size-sm);
   font-weight: 600;
   pointer-events: none;
@@ -689,6 +988,7 @@ button:disabled {
   opacity: 0;
   z-index: 999;
   white-space: nowrap;
+  box-shadow: var(--shadow-lifted);
 }
 
 .toast--visible {
@@ -712,9 +1012,9 @@ button:disabled {
   border-radius: var(--radius-sm);
   background: linear-gradient(
     90deg,
-    var(--color-surface) 25%,
+    var(--color-surface-sunk) 25%,
     var(--color-primary-pale) 50%,
-    var(--color-surface) 75%
+    var(--color-surface-sunk) 75%
   );
   background-size: 800px 100%;
   animation: skeleton-shimmer 1.4s infinite linear;
@@ -732,6 +1032,93 @@ button:disabled {
 }
 
 /* ------------------------------------------------------------
+   Solarpunk artistic layer — sun, botany & ephemeral fringe
+   ------------------------------------------------------------ */
+
+/* Climbing vines (enredadera) hugging the viewport edges.
+   Fills the open desktop space and gives the overgrown solarpunk feel. */
+.vine {
+  position: fixed;
+  top: 0;
+  width: 138px;
+  height: 100vh;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.5;
+  background-repeat: repeat-y;
+  background-size: 138px auto;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='138' height='360' viewBox='0 0 138 360' fill='none'%3E%3Cpath d='M22 0 C48 60 48 120 22 180 C-4 240 -4 300 22 360' stroke='%233e8e68' stroke-width='3' stroke-linecap='round' fill='none'/%3E%3Cg fill='%233e8e68'%3E%3Cellipse cx='46' cy='40' rx='16' ry='7' transform='rotate(-35 46 40)'/%3E%3Cellipse cx='56' cy='92' rx='16' ry='7' transform='rotate(-26 56 92)'/%3E%3Cellipse cx='54' cy='150' rx='15' ry='6.5' transform='rotate(34 54 150)'/%3E%3Cellipse cx='36' cy='210' rx='15' ry='6.5' transform='rotate(30 36 210)'/%3E%3Cellipse cx='30' cy='270' rx='15' ry='6.5' transform='rotate(-30 30 270)'/%3E%3Cellipse cx='40' cy='330' rx='16' ry='7' transform='rotate(-34 40 330)'/%3E%3C/g%3E%3Cpath d='M54 118 C70 122 72 136 62 142 C55 146 51 139 55 135' stroke='%233e8e68' stroke-width='2' stroke-linecap='round' fill='none'/%3E%3Cpath d='M32 248 C16 252 14 266 24 272 C31 276 35 269 31 265' stroke='%233e8e68' stroke-width='2' stroke-linecap='round' fill='none'/%3E%3Ccircle cx='50' cy='64' r='5' fill='%23d99a2b'/%3E%3Ccircle cx='32' cy='188' r='4' fill='%23e59ab0'/%3E%3Ccircle cx='44' cy='300' r='3.5' fill='%23b6a4dd'/%3E%3C/svg%3E");
+}
+
+.vine--left {
+  left: 0;
+}
+
+.vine--right {
+  right: 0;
+  transform: scaleX(-1);
+}
+
+/* On narrow screens the content column fills the width — hide the vines */
+@media (max-width: 900px) {
+  .vine {
+    display: none;
+  }
+}
+
+/* Ephemeral fringe — threads that hang by a moment, then drift and fade */
+.fringe {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 7px;
+  width: 100%;
+  max-width: 320px;
+  height: 42px;
+  pointer-events: none;
+}
+
+.fringe__thread {
+  width: 2px;
+  border-radius: 2px;
+  background: linear-gradient(
+    to bottom,
+    var(--color-primary-light),
+    transparent
+  );
+  transform-origin: top center;
+  animation: sway 6s ease-in-out infinite;
+  position: relative;
+}
+
+.fringe__thread::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  transform: translate(-50%, 40%);
+  background: var(--bead, var(--color-accent));
+  box-shadow: 0 0 7px 0 var(--bead, var(--color-accent));
+  animation: twinkle 3.2s ease-in-out infinite;
+}
+
+/* ------------------------------------------------------------
+   Reduced motion
+   ------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ------------------------------------------------------------
    Responsive — 375px minimum
    ------------------------------------------------------------ */
 @media (max-width: 480px) {
@@ -740,7 +1127,7 @@ button:disabled {
   }
 
   .screen__title {
-    font-size: var(--font-size-lg);
+    font-size: var(--font-size-xl);
   }
 
   .record-button,

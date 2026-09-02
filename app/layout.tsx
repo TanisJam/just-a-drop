@@ -1,5 +1,20 @@
 import type { Metadata } from "next";
+import { Space_Grotesk, Inter } from "next/font/google";
 import "./globals.css";
+
+const displayFont = Space_Grotesk({
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+  variable: "--font-display",
+  display: "swap",
+});
+
+const bodyFont = Inter({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-body",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "JustADrop",
@@ -16,8 +31,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es">
-      <body>{children}</body>
+    <html lang="es" className={`${displayFont.variable} ${bodyFont.variable}`}>
+      <body>
+        <div className="vine vine--left" aria-hidden="true" />
+        <div className="vine vine--right" aria-hidden="true" />
+        {children}
+      </body>
     </html>
   );
 }

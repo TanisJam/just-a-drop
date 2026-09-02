@@ -7,6 +7,7 @@ import { usePlayer } from "@/hooks/use-player";
 import { PlayButton } from "@/components/play-button";
 import { PlaybackProgress } from "@/components/playback-progress";
 import { StatusScreen } from "@/components/status-screen";
+import { Fringe } from "@/components/fringe";
 
 interface ListenClientProps {
   audioId: string;
@@ -132,7 +133,13 @@ export function ListenClient({ audioId }: ListenClientProps) {
     return (
       <main className="screen">
         <div className="status-screen">
-          <div className="status-screen__icon" aria-hidden="true">⚠️</div>
+          <div className="status-screen__icon status-screen__icon--alert" aria-hidden="true">
+            <svg viewBox="0 0 44 44" fill="none">
+              <path d="M22 6 40 38 H4 Z" stroke="currentColor" strokeWidth="2.5" strokeLinejoin="round" />
+              <line x1="22" y1="18" x2="22" y2="27" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+              <circle cx="22" cy="32.5" r="1.6" fill="currentColor" />
+            </svg>
+          </div>
           <h1 className="status-screen__title">Algo salió mal</h1>
           <p className="status-screen__description">{screen.message}</p>
         </div>
@@ -144,7 +151,12 @@ export function ListenClient({ audioId }: ListenClientProps) {
     return (
       <main className="screen">
         <div className="status-screen">
-          <div className="status-screen__icon" aria-hidden="true">✅</div>
+          <div className="status-screen__icon" aria-hidden="true">
+            <svg viewBox="0 0 44 44" fill="none">
+              <path d="M22 4C22 4 9 18 9 27a13 13 0 0 0 26 0c0-9-13-23-13-23Z" stroke="currentColor" strokeWidth="2.5" strokeLinejoin="round" />
+              <path d="M16 27.5l4 4 8-8.5" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </div>
           <h1 className="status-screen__title">Este drop fue escuchado</h1>
           <p className="status-screen__description">
             No podrás volver a escucharlo. Así funciona JustADrop.
@@ -175,8 +187,9 @@ export function ListenClient({ audioId }: ListenClientProps) {
         <h1 className="header__logo">JustADrop</h1>
       </header>
       <div className="screen__content">
-        <h2 className="screen__title">Alguien te mandó una gota de voz</h2>
         <PlayButton onPlay={handlePlay} />
+        <h2 className="screen__title">Alguien te mandó una gota de voz</h2>
+        <Fringe />
       </div>
     </main>
   );
