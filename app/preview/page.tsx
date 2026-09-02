@@ -73,6 +73,17 @@ export default function PreviewPage() {
               type="button"
               disabled={isUploading}
             >
+              {t.preview.cancel}
+            </button>
+            <button
+              className="btn btn--secondary"
+              onClick={() => {
+                clearRecordingData();
+                router.push("/");
+              }}
+              type="button"
+              disabled={isUploading}
+            >
               {t.preview.rerecord}
             </button>
             <button

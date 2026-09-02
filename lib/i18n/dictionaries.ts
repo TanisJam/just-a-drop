@@ -60,6 +60,7 @@ export const es = {
     subtitle: "Una vez creada la gota, no se puede modificar",
     uploadError: (message: string) => `Error al subir: ${message}`,
     rerecord: "Regrabar",
+    cancel: "Cancelar",
     create: "Crear gota",
   },
   upload: {
@@ -261,6 +262,7 @@ export const en: Dictionary = {
     subtitle: "Once the drop is created, it can't be changed",
     uploadError: (message: string) => `Upload error: ${message}`,
     rerecord: "Re-record",
+    cancel: "Cancel",
     create: "Create drop",
   },
   upload: {
